@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Resume Analyzer</title>
+    <style>
+        /* Global Styles */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            /* background-color: #f4f7f8; */
+            
+            height: 100vh;
+            background-image: url('/static/image/bg.png');
+            /* your image path */
+            background-size: cover;
+            /* make image cover full screen */
+            background-position:top;
+            /* center the image */
+            background-repeat: no-repeat;
+            margin: 0;
+            margin-block: 12px;
+            padding: 0;
+            display: flex;
+            /* Use flexbox for centering */
+            justify-content: center;
+            /* Center horizontally */
+            align-items: center;
+            /* Center vertically */
+            min-height: 100vh;
+            /* Full viewport height */
+            /* Ensure no overflow on the body itself */
+            overflow-x: hidden;
+            box-sizing: border-box;
+        }
+
+        /* Container */
+        .container {
+            max-width: 700px;
+            width: 90%;
+            /* Make it responsive */
+            background-color: #fff;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+            box-sizing: border-box;
+            /* Include padding in the element's total width and height */
+            /* Add some max-height and overflow for the container if content is very long */
+            max-height: 95vh;
+            /* Limit container height to prevent it from going off-screen */
+            overflow-y: auto;
+            /* Add scrollbar if content exceeds max-height */
+        
+        }
+
+        /* Heading */
+        h1 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 20px;
+        }
+
+        /* Form Styles */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            color: #555;
+        }
+
+        input[type="file"],
+        textarea {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            font-size: 14px;
+            box-sizing: border-box;
+            /* Include padding in the element's total width and height */
+        }
+
+        textarea {
+            resize: vertical;
+        }
+
+        button {
+            background-color:#025656; 
+            color: white;
+            border: none;
+            padding: 15px;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            align-self: stretch;
+            /* Make the button fill the width */
+        }
+
+        button:hover {
+            background-color: rgb(14, 167, 167);
+            /* A slightly darker teal */
+        }
+
+        /* Result Styles */
+        .result {
+            background-color: #f0f4f8;
+            padding: 20px;
+            border-radius: 8px;
+            margin-top: 30px;
+            border: 1px dashed #ccc;
+            /* Add a subtle dashed border */
+            /* Ensure text wraps within this div */
+            overflow-wrap: break-word;
+            /* Allows long words to break and wrap */
+            word-wrap: break-word;
+            /* Legacy property for word-break */
+        }
+
+        h2 {
+            margin-top: 0;
+            border-bottom: 2px solid #ddd;
+            padding-bottom: 10px;
+            color: #005f73;
+        }
+
+        pre {
+            margin: 0;
+            line-height: 1.6;
+            /* Critical for pre-formatted text to wrap */
+            white-space: pre-wrap;
+            /* Preserves whitespace but allows wrapping */
+            word-wrap: break-word;
+            /* Breaks long words */
+            overflow-wrap: break-word;
+            /* Modern equivalent */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Resume Analyzer</h1>
+        <form method="POST" enctype="multipart/form-data">
+            <label for="resume">Upload Resume (PDF):</label>
+            <input type="file" name="resume" id="resume" required>
+
+            <label for="jobdesc">Job Description:</label>
+            <textarea name="jobdesc" id="jobdesc" rows="6" placeholder="Paste job description here..."
+                required></textarea>
+
+            <button type="submit">Analyze Resume</button>
+        </form>
+
+        {% if result %}
+        <div class="result">
+            <h2>Analysis Result:</h2>
+            <pre>{{ result }}</pre>
+        </div>
+        {% endif %}
+    </div>
+</body>
+
+</html>
